@@ -1,1 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Special Message For You ❤️</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #feada6 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Floating Hearts Background */
+    .heart {
+      position: absolute;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* Card Container */
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(219, 112, 147, 0.3);
+      text-align: center;
+      max-width: 420px;
+      width: 90%;
+      z-index: 10;
+      backdrop-filter: blur(5px);
+      border: 2px solid #ffb6c1;
+    }
+
+    .card h1 {
+      color: #d63384;
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      color: #6c757d;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+      min-height: 50px;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    .btn-yes {
+      background-color: #ff4d6d;
+      color: white;
+      box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+    }
+
+    .btn-yes:hover {
+      background-color: #ff2a54;
+      transform: scale(1.08);
+    }
+
+    .btn-no {
+      background-color: #ffb3c1;
+      color: #590d22;
+      position: relative;
+    }
+
+    /* Success Message styling */
+    .success-message {
+      display: none;
+      animation: fadeIn 0.8s ease-in-out forwards;
+    }
+
+    .success-message h2 {
+      color: #ff4d6d;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .success-message p {
+      font-size: 1.2rem;
+      color: #800f2f;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating background elements -->
+  <div id="hearts-container"></div>
+
+  <!-- Proposal Card -->
+  <div class="card">
+    <div id="proposal-content">
+      <h1>Hey You! 💖</h1>
+      <p>
+        Every moment with you feels like magic. I was wondering... will you do me the honor of being mine?
+      </p>
+      <div class="buttons">
+        <button class="btn btn-yes" onclick="acceptProposal()">Yes! 💕</button>
+        <button class="btn btn-no" id="no-btn" onmouseover="moveNoButton()">No 😜</button>
+      </div>
+    </div>
+
+    <!-- Message shown after clicking "Yes" -->
+    <div id="success-content" class="success-message">
+      <h2>Yay! 🎉❤️</h2>
+      <p>You just made me the happiest person ever! 🥰✨</p>
+    </div>
+  </div>
+
+  <script>
+    // Generate floating hearts
+    const heartsContainer = document.getElementById('hearts-container');
+    for (let i = 0; i < 25; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      heartsContainer.appendChild(heart);
+    }
+
+    // Make the "No" button dodge the mouse cursor
+    function moveNoButton() {
+      const btn = document.getElementById('no-btn');
+      const x = Math.random() * (window.innerWidth - btn.offsetWidth - 100);
+      const y = Math.random() * (window.innerHeight - btn.offsetHeight - 100);
+      
+      btn.style.position = 'fixed';
+      btn.style.left = `${x}px`;
+      btn.style.top = `${y}px`;
+    }
+
+    // Handle "Yes" click event
+    function acceptProposal() {
+      document.getElementById('proposal-content').style.display = 'none';
+      document.getElementById('success-content').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
