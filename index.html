@@ -30,7 +30,7 @@
       padding: 40px;
     }
 
-    /* Floating Hearts Animation */
+    /* Floating Hearts Background */
     .heart {
       position: absolute;
       color: rgba(244, 63, 94, 0.45);
@@ -52,7 +52,7 @@
       }
     }
 
-    /* Dark Mode Ambient Glows */
+    /* Ambient Glow */
     .glow-bg {
       position: absolute;
       width: 650px;
@@ -69,14 +69,14 @@
       to { transform: scale(1.15); opacity: 0.7; }
     }
 
-    /* Sleek Dark Glass Card */
+    /* Card Container */
     .card {
       background: rgba(30, 41, 59, 0.75);
       backdrop-filter: blur(35px);
       -webkit-backdrop-filter: blur(35px);
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 32px;
-      padding: 60px 56px;
+      padding: 50px 48px;
       max-width: 620px;
       width: 100%;
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 
@@ -90,7 +90,7 @@
       font-family: 'Dancing Script', cursive;
       font-size: 3.2rem;
       color: #fb7185;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       text-shadow: 0 0 20px rgba(251, 113, 133, 0.3);
     }
 
@@ -99,7 +99,7 @@
       line-height: 1.85;
       color: #cbd5e1;
       font-weight: 400;
-      margin-bottom: 36px;
+      margin-bottom: 32px;
       letter-spacing: 0.01em;
     }
 
@@ -146,10 +146,10 @@
       transform: translateY(-2px);
     }
 
-    /* Dark Mode Message Box */
+    /* Message Box */
     .message-box {
       width: 100%;
-      height: 130px;
+      height: 120px;
       padding: 16px 20px;
       border-radius: 18px;
       border: 1px solid rgba(255, 255, 255, 0.15);
@@ -174,8 +174,8 @@
 
     /* Star Rating */
     .rating-container {
-      margin-top: 32px;
-      padding-top: 28px;
+      margin-top: 28px;
+      padding-top: 24px;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
@@ -217,8 +217,17 @@
       font-size: 1.05rem;
       color: #fb7185;
       font-weight: 600;
-      margin-top: 16px;
+      margin-top: 14px;
       min-height: 28px;
+    }
+
+    /* Animated Math Canvas Heart */
+    #heartCanvas {
+      width: 480px;
+      height: 380px;
+      margin: 10px auto 0 auto;
+      display: block;
+      background: transparent;
     }
 
     /* Screen Animations */
@@ -282,13 +291,13 @@
         <div id="rating-response" class="rating-feedback"></div>
       </div>
 
-      <button class="btn btn-yes" style="width: 100%; margin-top: 28px;" onclick="goToPage('page-reply')">Write a Note Back To Me 💌</button>
+      <button class="btn btn-yes" style="width: 100%; margin-top: 24px;" onclick="goToPage('page-reply')">Write a Note Back To Me 💌</button>
     </div>
 
-    <!-- STEP 4: Secret Message Box (Final Step) -->
+    <!-- STEP 4: Secret Message Box -->
     <div id="page-reply" class="page">
       <div class="salutation">Leave a Note For Me ✨</div>
-      <p style="font-size: 1.05rem; color: #94a3b8; margin-bottom: 24px;">
+      <p style="font-size: 1.05rem; color: #94a3b8; margin-bottom: 20px;">
         Before you go, write anything you'd like to tell me...
       </p>
       
@@ -297,12 +306,15 @@
       <button id="send-btn" class="btn btn-yes" style="width: 100%;" onclick="sendMessageAndFinish()">Send Secret Note ❤️</button>
     </div>
 
-    <!-- FINAL THANKS SCREEN -->
+    <!-- STEP 5: FINAL SCREEN (MATH HEART ANIMATION) -->
     <div id="page-final" class="page">
-      <div class="salutation" style="font-size: 3rem;">Message Received! 💌</div>
-      <div class="letter-text" style="margin-bottom: 0;">
-        Your note has been sent directly to me. Thank you for making this moment so special! ✨
-      </div>
+      <div class="salutation" style="font-size: 2.8rem; margin-bottom: 8px;">Message Received! 💌</div>
+      <p style="color: #cbd5e1; font-size: 1.05rem;">
+        Thank you for making this moment so special! ✨
+      </p>
+      
+      <!-- Canvas where the math heart draws -->
+      <canvas id="heartCanvas" width="500" height="400"></canvas>
     </div>
 
     <!-- EXIT PAGE -->
@@ -336,6 +348,10 @@
         page.classList.remove('active');
       });
       document.getElementById(pageId).classList.add('active');
+
+      if (pageId === 'page-final') {
+        startHeartAnimation();
+      }
     }
 
     // Sends the secret message directly to manvitmanvit@gmail.com
@@ -396,6 +412,75 @@
           _subject: "Star Rating Received! ⭐"
         })
       }).catch(err => console.log("Rating sent"));
+    }
+
+    // Mathematical Starburst Heart Animation from Python image
+    function startHeartAnimation() {
+      const canvas = document.getElementById('heartCanvas');
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2 + 30; // Shift down slightly for top curves
+
+      const colors = ["#ff4d6d", "#3a86ff", "#06d6a0", "#ffd166", "#00f5d4", "#ff006e", "#ffb703", "#ff85a1"];
+      const totalLines = 120;
+      let currentLine = 0;
+
+      function drawStar(cx, cy, spikes, outerRadius, innerRadius, color) {
+        let rot = Math.PI / 2 * 3;
+        let x = cx;
+        let y = cy;
+        let step = Math.PI / spikes;
+
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - outerRadius);
+        for (let i = 0; i < spikes; i++) {
+          x = cx + Math.cos(rot) * outerRadius;
+          y = cy + Math.sin(rot) * outerRadius;
+          ctx.lineTo(x, y);
+          rot += step;
+
+          x = cx + Math.cos(rot) * innerRadius;
+          y = cy + Math.sin(rot) * innerRadius;
+          ctx.lineTo(x, y);
+          rot += step;
+        }
+        ctx.lineTo(cx, cy - outerRadius);
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.fill();
+      }
+
+      function animate() {
+        if (currentLine >= totalLines) return;
+
+        const angle = currentLine * (Math.PI * 2) / totalLines;
+        
+        // Exact Parametric Formula from Python Image
+        const x = 16 * Math.pow(Math.sin(angle), 3) * 11;
+        const y = (13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle)) * 11;
+
+        const targetX = centerX + x;
+        const targetY = centerY - y; // Canvas inverted Y axis
+        const color = colors[Math.floor(Math.random() * colors.length)];
+
+        // Draw line from center top (0, 40 offset in Python) to heart border
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY - 40);
+        ctx.lineTo(targetX, targetY);
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        // Draw tiny starburst point at tip
+        drawStar(targetX, targetY, 4, 4, 1.5, color);
+
+        currentLine++;
+        setTimeout(animate, 25); // Smooth line-by-line drawing speed
+      }
+
+      animate();
     }
   </script>
 
