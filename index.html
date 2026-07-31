@@ -22,7 +22,7 @@
       position: relative;
     }
 
-    /* Soft floating ambient light */
+    /* Soft ambient background elements */
     .bg-circle {
       position: absolute;
       border-radius: 50%;
@@ -45,7 +45,7 @@
       right: -100px;
     }
 
-    /* Clean, Professional Glass Card */
+    /* Glass Card Style */
     .card {
       background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(12px);
@@ -97,8 +97,6 @@
       justify-content: center;
       align-items: center;
       gap: 16px;
-      position: relative;
-      min-height: 50px;
     }
 
     .btn {
@@ -127,25 +125,20 @@
       background-color: #f1f3f5;
       color: #495057;
       border: 1px solid #dee2e6;
-      position: relative;
     }
 
-    /* Success Screen */
-    .success-message {
+    .btn-no:hover {
+      background-color: #e9ecef;
+    }
+
+    /* Screen Transitions */
+    .screen {
       display: none;
+    }
+
+    .screen.active {
+      display: block;
       animation: fadeIn 0.6s ease-in-out forwards;
-    }
-
-    .success-message h2 {
-      color: #2b2d42;
-      font-size: 2rem;
-      margin-bottom: 12px;
-    }
-
-    .success-message p {
-      font-size: 1.1rem;
-      color: #4a4e69;
-      margin-bottom: 0;
     }
 
     @keyframes fadeIn {
@@ -160,8 +153,9 @@
   <div class="bg-circle circle-2"></div>
 
   <div class="card">
-    <!-- Main Proposal View -->
-    <div id="proposal-content">
+    
+    <!-- PAGE 1: Main Letter -->
+    <div id="page-proposal" class="screen active">
       <span class="badge">A Note For You</span>
       <h1>I Have Something to Tell You...</h1>
       <p>
@@ -171,41 +165,38 @@
         <span class="highlight">Will you take this next step with me?</span>
       </p>
       <div class="buttons">
-        <button class="btn btn-yes" onclick="acceptProposal()">Yes, I will</button>
-        <button class="btn btn-no" id="no-btn" onmouseover="moveNoButton()">Not yet</button>
+        <button class="btn btn-yes" onclick="showPage('page-yes')">Yes, I will</button>
+        <button class="btn btn-no" onclick="showPage('page-no')">Not yet</button>
       </div>
     </div>
 
-    <!-- Confirmation View -->
-    <div id="success-content" class="success-message">
-      <h2>You Just Made My Day ✨</h2>
-      <p>Thank you for your confirmatio
-n THANK YOU</p>
+    <!-- PAGE 2: "Yes" Clicked -->
+    <div id="page-yes" class="screen">
+      <span class="badge">✨ Special Moment</span>
+      <h1>You Made My Day! ❤️</h1>
+      <p>
+        Thank you for trusting me with your heart. I promise to cherish every single step of this journey together.
+      </p>
     </div>
+
+    <!-- PAGE 3: "Not yet" Clicked -->
+    <div id="page-no" class="screen">
+      <span class="badge">🌸 Warm Regards</span>
+      <h1>Thank You!</h1>
+      <p>
+        Thank you for taking the time to read this note. Your time and presence mean a lot to me no matter what.
+      </p>
+    </div>
+
   </div>
 
   <script>
-    // Dodging "Not yet" button
-    function moveNoButton() {
-      const btn = document.getElementById('no-btn');
-      const card = document.querySelector('.card');
-      
-      // Keep movement within reasonable bounds on screen
-      const maxX = window.innerWidth - btn.offsetWidth - 40;
-      const maxY = window.innerHeight - btn.offsetHeight - 40;
-
-      const randomX = Math.max(20, Math.floor(Math.random() * maxX));
-      const randomY = Math.max(20, Math.floor(Math.random() * maxY));
-      
-      btn.style.position = 'fixed';
-      btn.style.left = `${randomX}px`;
-      btn.style.top = `${randomY}px`;
-    }
-
-    // Success response handler
-    function acceptProposal() {
-      document.getElementById('proposal-content').style.display = 'none';
-      document.getElementById('success-content').style.display = 'block';
+    // Switches views seamlessly
+    function showPage(pageId) {
+      document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+      });
+      document.getElementById(pageId).classList.add('active');
     }
   </script>
 </body>
