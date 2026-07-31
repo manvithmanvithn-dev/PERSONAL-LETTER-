@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Letter For You</title>
+  <title>A Special Note For You</title>
   
-  <!-- Premium Fonts -->
+  <!-- Premium Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
     * {
@@ -30,7 +30,7 @@
       padding: 20px;
     }
 
-    /* Floating Ambient Hearts */
+    /* Animated Floating Elements */
     .heart {
       position: absolute;
       color: rgba(225, 29, 72, 0.35);
@@ -54,7 +54,7 @@
       }
     }
 
-    /* Ambient Glow Background */
+    /* Soft Glow Overlay */
     .glow-bg {
       position: absolute;
       width: 450px;
@@ -71,14 +71,14 @@
       to { transform: scale(1.1); opacity: 0.8; }
     }
 
-    /* Glass Card */
+    /* Main Glass Container */
     .card {
       background: rgba(255, 255, 255, 0.88);
       backdrop-filter: blur(25px);
       -webkit-backdrop-filter: blur(25px);
       border: 1px solid rgba(255, 255, 255, 0.9);
       border-radius: 28px;
-      padding: 50px 42px;
+      padding: 48px 38px;
       max-width: 500px;
       width: 100%;
       box-shadow: 0 25px 50px rgba(225, 29, 72, 0.08), 
@@ -88,7 +88,7 @@
       position: relative;
     }
 
-    /* Calligraphy Title */
+    /* Elegant Headings */
     .salutation {
       font-family: 'Dancing Script', cursive;
       font-size: 2.5rem;
@@ -96,7 +96,6 @@
       margin-bottom: 24px;
     }
 
-    /* Letter Paragraph */
     .letter-text {
       font-size: 1.08rem;
       line-height: 1.8;
@@ -148,7 +147,57 @@
       color: #334155;
     }
 
-    /* Page Switcher Animation */
+    /* Star Rating Section */
+    .rating-container {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(226, 232, 240, 0.8);
+    }
+
+    .rating-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    .stars {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      direction: rtl; /* Allows hover effects to flow left-to-right via CSS */
+    }
+
+    .stars span {
+      font-size: 1.8rem;
+      color: #cbd5e1;
+      cursor: pointer;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .stars span:hover,
+    .stars span:hover ~ span {
+      color: #fbbf24;
+      transform: scale(1.15);
+    }
+
+    .stars span.selected,
+    .stars span.selected ~ span {
+      color: #fbbf24;
+    }
+
+    .rating-feedback {
+      font-size: 0.95rem;
+      color: #e11d48;
+      font-weight: 600;
+      margin-top: 12px;
+      min-height: 24px;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    /* Smooth Screen Transitions */
     .page {
       display: none;
     }
@@ -177,7 +226,7 @@
 
   <div class="card">
     
-    <!-- STEP 1: Teaser Page -->
+    <!-- STEP 1: Intro Teaser -->
     <div id="page-1" class="page active">
       <div class="salutation" style="margin-bottom: 32px;">I want to tell you something... ✨</div>
       <div class="button-group">
@@ -186,9 +235,9 @@
       </div>
     </div>
 
-    <!-- STEP 2: The Romantic Letter Page -->
+    <!-- STEP 2: The Letter -->
     <div id="page-letter" class="page">
-      <div class="salutation">Dearest... ✨</div>
+      <div class="salutation">To Someone Special... ✨</div>
       <div class="letter-text">
         Every once in a while, someone truly special enters your life and changes everything for the better. Being with you feels natural, peaceful, and endlessly joyful. I treasure every single moment, smile, and word we share together.
       </div>
@@ -198,18 +247,31 @@
       </div>
     </div>
 
-    <!-- STEP 3: "Yes" Page -->
+    <!-- STEP 3: "Yes" + Star Rating Screen -->
     <div id="page-yes" class="page">
       <div class="salutation" style="font-size: 2.8rem;">You Made My Day! 💖</div>
-      <div class="letter-text" style="font-size: 1.15rem; margin-bottom: 0;">
+      <div class="letter-text" style="font-size: 1.1rem; margin-bottom: 0;">
         Thank you for being such a beautiful part of my life. I promise to cherish you and always bring a smile to your face.
+      </div>
+
+      <!-- Interactive 5-Star Rating -->
+      <div class="rating-container">
+        <div class="rating-title">Rate My Effort ✨</div>
+        <div class="stars">
+          <span onclick="rateEffort(5)">★</span>
+          <span onclick="rateEffort(4)">★</span>
+          <span onclick="rateEffort(3)">★</span>
+          <span onclick="rateEffort(2)">★</span>
+          <span onclick="rateEffort(1)">★</span>
+        </div>
+        <div id="rating-response" class="rating-feedback"></div>
       </div>
     </div>
 
     <!-- STEP 4: "Don't tell" or Decline Page -->
     <div id="page-no" class="page">
       <div class="salutation" style="font-size: 2.5rem;">Thank You 🌸</div>
-      <div class="letter-text" style="font-size: 1.15rem; margin-bottom: 0;">
+      <div class="letter-text" style="font-size: 1.1rem; margin-bottom: 0;">
         Thank you for taking the time to open this! Your presence alone means the world to me.
       </div>
     </div>
@@ -217,7 +279,7 @@
   </div>
 
   <script>
-    // Create animated floating hearts background
+    // Create floating heart particles
     const heartsContainer = document.getElementById('hearts-container');
     const heartSymbols = ['❤️', '💖', '💕', '✨'];
 
@@ -231,12 +293,33 @@
       heartsContainer.appendChild(heart);
     }
 
-    // Page switcher
+    // Smooth Page Navigation
     function goToPage(pageId) {
       document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
       });
       document.getElementById(pageId).classList.add('active');
+    }
+
+    // Star Rating Logic
+    function rateEffort(rating) {
+      const allStars = document.querySelectorAll('.stars span');
+      allStars.forEach(star => star.classList.remove('selected'));
+      
+      // Select clicked star and all stars to its right (RTL display)
+      const clickedStarIndex = 5 - rating;
+      for (let i = clickedStarIndex; i < 5; i++) {
+        allStars[i].classList.add('selected');
+      }
+
+      const responseText = document.getElementById('rating-response');
+      if (rating === 5) {
+        responseText.innerHTML = "5/5! You're the best! 🥰✨";
+      } else if (rating >= 3) {
+        responseText.innerHTML = `Thank you for the ${rating}-star rating! 😊❤️`;
+      } else {
+        responseText.innerHTML = "I'll try even harder next time! 🥺💖";
+      }
     }
   </script>
 
