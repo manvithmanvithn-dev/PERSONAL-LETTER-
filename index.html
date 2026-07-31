@@ -30,7 +30,7 @@
       padding: 20px;
     }
 
-    /* Floating Hearts Animation */
+    /* Floating Ambient Hearts */
     .heart {
       position: absolute;
       color: rgba(225, 29, 72, 0.35);
@@ -54,7 +54,7 @@
       }
     }
 
-    /* Subtle Ambient Glow */
+    /* Ambient Glow Background */
     .glow-bg {
       position: absolute;
       width: 450px;
@@ -71,7 +71,7 @@
       to { transform: scale(1.1); opacity: 0.8; }
     }
 
-    /* Letter Card */
+    /* Glass Card */
     .card {
       background: rgba(255, 255, 255, 0.88);
       backdrop-filter: blur(25px);
@@ -88,15 +88,15 @@
       position: relative;
     }
 
-    /* Handwritten Greeting Style */
+    /* Calligraphy Title */
     .salutation {
       font-family: 'Dancing Script', cursive;
-      font-size: 2.3rem;
+      font-size: 2.5rem;
       color: #e11d48;
-      margin-bottom: 12px;
+      margin-bottom: 24px;
     }
 
-    /* Letter Body */
+    /* Letter Paragraph */
     .letter-text {
       font-size: 1.08rem;
       line-height: 1.8;
@@ -106,7 +106,7 @@
       letter-spacing: 0.01em;
     }
 
-    /* Action Buttons */
+    /* Buttons */
     .button-group {
       display: flex;
       gap: 14px;
@@ -148,7 +148,7 @@
       color: #334155;
     }
 
-    /* Smooth Page Transitions */
+    /* Page Switcher Animation */
     .page {
       display: none;
     }
@@ -177,8 +177,17 @@
 
   <div class="card">
     
-    <!-- PAGE 1: The Letter -->
-    <div id="page-letter" class="page active">
+    <!-- STEP 1: Teaser Page -->
+    <div id="page-1" class="page active">
+      <div class="salutation" style="margin-bottom: 32px;">I want to tell you something... ✨</div>
+      <div class="button-group">
+        <button class="btn btn-yes" onclick="goToPage('page-letter')">Tell me ❤️</button>
+        <button class="btn btn-no" onclick="goToPage('page-no')">Don't tell 😜</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: The Romantic Letter Page -->
+    <div id="page-letter" class="page">
       <div class="salutation">Dearest... ✨</div>
       <div class="letter-text">
         Every once in a while, someone truly special enters your life and changes everything for the better. Being with you feels natural, peaceful, and endlessly joyful. I treasure every single moment, smile, and word we share together.
@@ -189,7 +198,7 @@
       </div>
     </div>
 
-    <!-- PAGE 2: When "Yes" is Clicked -->
+    <!-- STEP 3: "Yes" Page -->
     <div id="page-yes" class="page">
       <div class="salutation" style="font-size: 2.8rem;">You Made My Day! 💖</div>
       <div class="letter-text" style="font-size: 1.15rem; margin-bottom: 0;">
@@ -197,18 +206,18 @@
       </div>
     </div>
 
-    <!-- PAGE 3: When "Thank You" is Clicked -->
+    <!-- STEP 4: "Don't tell" or Decline Page -->
     <div id="page-no" class="page">
       <div class="salutation" style="font-size: 2.5rem;">Thank You 🌸</div>
       <div class="letter-text" style="font-size: 1.15rem; margin-bottom: 0;">
-        Thank you for taking the time to read this. Your presence alone means the world to me.
+        Thank you for taking the time to open this! Your presence alone means the world to me.
       </div>
     </div>
 
   </div>
 
   <script>
-    // Create animated floating hearts in background
+    // Create animated floating hearts background
     const heartsContainer = document.getElementById('hearts-container');
     const heartSymbols = ['❤️', '💖', '💕', '✨'];
 
