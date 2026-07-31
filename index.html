@@ -22,9 +22,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(circle at center, #fff0f3 0%, #fcd5ce 50%, #f8edeb 100%);
+      background: radial-gradient(circle at center, #1e1b2e 0%, #0f172a 70%, #090d16 100%);
       font-family: 'Plus Jakarta Sans', sans-serif;
-      color: #2b2d42;
+      color: #f8fafc;
       overflow: hidden;
       position: relative;
       padding: 40px;
@@ -33,7 +33,7 @@
     /* Floating Hearts Animation */
     .heart {
       position: absolute;
-      color: rgba(225, 29, 72, 0.35);
+      color: rgba(244, 63, 94, 0.45);
       font-size: 20px;
       animation: floatUp 8s ease-in-out infinite;
       z-index: 1;
@@ -52,35 +52,35 @@
       }
     }
 
-    /* Desktop Ambient Glow */
+    /* Dark Mode Ambient Glows */
     .glow-bg {
       position: absolute;
       width: 650px;
       height: 650px;
-      background: rgba(255, 182, 193, 0.5);
-      filter: blur(120px);
+      background: rgba(244, 63, 94, 0.18);
+      filter: blur(140px);
       border-radius: 50%;
       z-index: 1;
       animation: pulseGlow 6s infinite alternate ease-in-out;
     }
 
     @keyframes pulseGlow {
-      from { transform: scale(0.9); opacity: 0.5; }
-      to { transform: scale(1.1); opacity: 0.8; }
+      from { transform: scale(0.9); opacity: 0.4; }
+      to { transform: scale(1.15); opacity: 0.7; }
     }
 
-    /* Desktop-Optimized Card Container */
+    /* Sleek Dark Glass Card */
     .card {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(30px);
-      -webkit-backdrop-filter: blur(30px);
-      border: 1px solid rgba(255, 255, 255, 0.95);
+      background: rgba(30, 41, 59, 0.75);
+      backdrop-filter: blur(35px);
+      -webkit-backdrop-filter: blur(35px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 32px;
       padding: 60px 56px;
-      max-width: 620px; /* Wider layout perfect for PC monitors */
+      max-width: 620px;
       width: 100%;
-      box-shadow: 0 30px 60px rgba(225, 29, 72, 0.1), 
-                  0 4px 20px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 
+                  0 0 40px rgba(244, 63, 94, 0.1);
       text-align: center;
       z-index: 10;
       position: relative;
@@ -88,34 +88,22 @@
 
     .salutation {
       font-family: 'Dancing Script', cursive;
-      font-size: 3rem;
-      color: #e11d48;
+      font-size: 3.2rem;
+      color: #fb7185;
       margin-bottom: 24px;
+      text-shadow: 0 0 20px rgba(251, 113, 133, 0.3);
     }
 
     .letter-text {
       font-size: 1.15rem;
       line-height: 1.85;
-      color: #334155;
+      color: #cbd5e1;
       font-weight: 400;
       margin-bottom: 36px;
       letter-spacing: 0.01em;
     }
 
-    .highlight-badge {
-      display: inline-block;
-      background: #ffe4e6;
-      color: #e11d48;
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 6px 18px;
-      border-radius: 20px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 20px;
-    }
-
-    /* Desktop Buttons */
+    /* Buttons */
     .button-group {
       display: flex;
       gap: 16px;
@@ -136,61 +124,65 @@
     }
 
     .btn-yes {
-      background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+      background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
       color: #ffffff;
-      box-shadow: 0 10px 25px rgba(225, 29, 72, 0.3);
+      box-shadow: 0 10px 25px rgba(244, 63, 94, 0.35);
     }
 
     .btn-yes:hover {
       transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 15px 35px rgba(225, 29, 72, 0.45);
+      box-shadow: 0 15px 35px rgba(244, 63, 94, 0.5);
     }
 
     .btn-no {
-      background: #f1f5f9;
-      color: #64748b;
-      border: 1px solid #e2e8f0;
+      background: rgba(255, 255, 255, 0.06);
+      color: #94a3b8;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .btn-no:hover {
-      background: #e2e8f0;
-      color: #334155;
+      background: rgba(255, 255, 255, 0.12);
+      color: #f1f5f9;
       transform: translateY(-2px);
     }
 
-    /* Message Box */
+    /* Dark Mode Message Box */
     .message-box {
       width: 100%;
       height: 130px;
       padding: 16px 20px;
       border-radius: 18px;
-      border: 1px solid #cbd5e1;
-      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(15, 23, 42, 0.8);
       font-family: inherit;
       font-size: 1.05rem;
-      color: #1e293b;
+      color: #f8fafc;
       resize: none;
       outline: none;
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
       margin-bottom: 20px;
     }
 
+    .message-box::placeholder {
+      color: #64748b;
+    }
+
     .message-box:focus {
-      border-color: #e11d48;
-      box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.15);
+      border-color: #fb7185;
+      box-shadow: 0 0 0 4px rgba(251, 113, 133, 0.2);
     }
 
     /* Star Rating */
     .rating-container {
       margin-top: 32px;
       padding-top: 28px;
-      border-top: 1px solid rgba(226, 232, 240, 0.8);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .rating-title {
       font-size: 0.95rem;
       font-weight: 600;
-      color: #64748b;
+      color: #94a3b8;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       margin-bottom: 14px;
@@ -205,7 +197,7 @@
 
     .stars span {
       font-size: 2.2rem;
-      color: #cbd5e1;
+      color: #475569;
       cursor: pointer;
       transition: color 0.25s ease, transform 0.25s ease;
     }
@@ -223,13 +215,13 @@
 
     .rating-feedback {
       font-size: 1.05rem;
-      color: #e11d48;
+      color: #fb7185;
       font-weight: 600;
       margin-top: 16px;
       min-height: 28px;
     }
 
-    /* Transitions */
+    /* Screen Animations */
     .page { display: none; }
     .page.active {
       display: block;
@@ -251,19 +243,18 @@
     
     <!-- STEP 1: Teaser Page -->
     <div id="page-1" class="page active">
-      <span class="highlight-badge">Classroom Memories</span>
-      <div class="salutation" style="margin-bottom: 28px;">I want to tell you something... ✨</div>
+      <div class="salutation" style="margin-bottom: 32px;">I want to tell you something... ✨</div>
       <div class="button-group">
         <button class="btn btn-yes" onclick="goToPage('page-letter')">Yeah, tell me ❤️</button>
         <button class="btn btn-no" onclick="goToPage('page-no')">Maybe another time ✨</button>
       </div>
     </div>
 
-    <!-- STEP 2: The Romantic Letter (with Classmate reference) -->
+    <!-- STEP 2: The Romantic Letter -->
     <div id="page-letter" class="page">
       <div class="salutation">To Someone Special... ✨</div>
       <div class="letter-text">
-        From sitting in the same classroom to realizing how much you mean to me, having you around has made every day brighter. Being with you feels natural, peaceful, and endlessly joyful. I treasure every single conversation, smile, and memory we share together.
+        Every once in a while, someone truly special enters your life and changes everything for the better. Being with you feels natural, peaceful, and endlessly joyful. I treasure every single moment, smile, and word we share together.
       </div>
       <div class="button-group">
         <button class="btn btn-yes" onclick="goToPage('page-yes')">Yes, Always ❤️</button>
@@ -294,10 +285,10 @@
       <button class="btn btn-yes" style="width: 100%; margin-top: 28px;" onclick="goToPage('page-reply')">Write a Note Back To Me 💌</button>
     </div>
 
-    <!-- STEP 4: Secret Message Box (NOW AT THE VERY LAST) -->
+    <!-- STEP 4: Secret Message Box (Final Step) -->
     <div id="page-reply" class="page">
       <div class="salutation">Leave a Note For Me ✨</div>
-      <p style="font-size: 1.05rem; color: #64748b; margin-bottom: 24px;">
+      <p style="font-size: 1.05rem; color: #94a3b8; margin-bottom: 24px;">
         Before you go, write anything you'd like to tell me...
       </p>
       
@@ -306,7 +297,7 @@
       <button id="send-btn" class="btn btn-yes" style="width: 100%;" onclick="sendMessageAndFinish()">Send Secret Note ❤️</button>
     </div>
 
-    <!-- FINAL THANKS SCREEN (After sending secret note) -->
+    <!-- FINAL THANKS SCREEN -->
     <div id="page-final" class="page">
       <div class="salutation" style="font-size: 3rem;">Message Received! 💌</div>
       <div class="letter-text" style="margin-bottom: 0;">
@@ -314,7 +305,7 @@
       </div>
     </div>
 
-    <!-- EXIT PAGE (If she clicks no/maybe another time) -->
+    <!-- EXIT PAGE -->
     <div id="page-no" class="page">
       <div class="salutation" style="font-size: 2.8rem;">Thank You 🌸</div>
       <div class="letter-text" style="margin-bottom: 0;">
@@ -364,7 +355,7 @@
           },
           body: JSON.stringify({
             Secret_Message: messageText,
-            _subject: "New Secret Note From Your Classmate Letter! ❤️"
+            _subject: "New Secret Note From Your Proposal Letter! ❤️"
           })
         })
         .then(() => goToPage('page-final'))
