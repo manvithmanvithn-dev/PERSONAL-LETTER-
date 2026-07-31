@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Note For You</title>
+  <title>A Letter For You</title>
+  
+  <!-- Premium Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   
   <style>
     * {
@@ -20,116 +22,146 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #fdfbfb;
-      background-image: linear-gradient(120deg, #fff1f2 0%, #fdfbfb 100%);
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: #1e293b;
+      background: radial-gradient(circle at center, #fff0f3 0%, #fcd5ce 60%, #f8edeb 100%);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #2b2d42;
+      overflow: hidden;
+      position: relative;
       padding: 20px;
     }
 
-    /* Minimalist Glass Card */
-    .container {
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
+    /* Floating Hearts Animation */
+    .heart {
+      position: absolute;
+      color: rgba(225, 29, 72, 0.35);
+      font-size: 18px;
+      animation: floatUp 7s ease-in-out infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(105vh) scale(0.6) rotate(0deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.2) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Subtle Ambient Glow */
+    .glow-bg {
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      background: rgba(255, 182, 193, 0.45);
+      filter: blur(90px);
+      border-radius: 50%;
+      z-index: 1;
+      animation: pulseGlow 6s infinite alternate ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      from { transform: scale(0.9); opacity: 0.5; }
+      to { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    /* Letter Card */
+    .card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
       border-radius: 28px;
-      padding: 56px 40px;
-      max-width: 480px;
+      padding: 50px 42px;
+      max-width: 500px;
       width: 100%;
-      box-shadow: 0 20px 50px rgba(225, 29, 72, 0.05), 
-                  0 1px 3px rgba(0, 0, 0, 0.02);
+      box-shadow: 0 25px 50px rgba(225, 29, 72, 0.08), 
+                  0 2px 10px rgba(0, 0, 0, 0.03);
       text-align: center;
+      z-index: 10;
+      position: relative;
     }
 
-    /* Subdued Tag Accent */
-    .tag {
-      display: inline-block;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    /* Handwritten Greeting Style */
+    .salutation {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.3rem;
       color: #e11d48;
-      background: #ffe4e6;
-      padding: 6px 16px;
-      border-radius: 100px;
-      margin-bottom: 24px;
+      margin-bottom: 12px;
     }
 
-    h1 {
-      font-size: 2.1rem;
-      font-weight: 700;
-      color: #0f172a;
-      letter-spacing: -0.02em;
-      line-height: 1.25;
-      margin-bottom: 18px;
-    }
-
-    p {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: #475569;
+    /* Letter Body */
+    .letter-text {
+      font-size: 1.08rem;
+      line-height: 1.8;
+      color: #334155;
       font-weight: 400;
-      margin-bottom: 36px;
+      margin-bottom: 32px;
+      letter-spacing: 0.01em;
     }
 
-    /* Clean Modern Buttons */
+    /* Action Buttons */
     .button-group {
       display: flex;
-      gap: 12px;
+      gap: 14px;
       justify-content: center;
       align-items: center;
     }
 
     .btn {
       flex: 1;
-      padding: 16px 24px;
+      padding: 16px 28px;
       font-size: 0.95rem;
       font-weight: 600;
       border-radius: 14px;
       border: none;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       font-family: inherit;
     }
 
-    .btn-primary {
-      background: #e11d48;
+    .btn-yes {
+      background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
       color: #ffffff;
-      box-shadow: 0 10px 20px rgba(225, 29, 72, 0.2);
+      box-shadow: 0 10px 25px rgba(225, 29, 72, 0.3);
     }
 
-    .btn-primary:hover {
-      background: #be123c;
-      transform: translateY(-2px);
-      box-shadow: 0 14px 24px rgba(225, 29, 72, 0.28);
+    .btn-yes:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 14px 30px rgba(225, 29, 72, 0.4);
     }
 
-    .btn-secondary {
+    .btn-no {
       background: #f1f5f9;
       color: #64748b;
       border: 1px solid #e2e8f0;
     }
 
-    .btn-secondary:hover {
+    .btn-no:hover {
       background: #e2e8f0;
       color: #334155;
     }
 
-    /* Dynamic Page Switching */
+    /* Smooth Page Transitions */
     .page {
       display: none;
     }
 
     .page.active {
       display: block;
-      animation: smoothFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: fadeInPage 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    @keyframes smoothFade {
+    @keyframes fadeInPage {
       from {
         opacity: 0;
-        transform: translateY(12px);
+        transform: translateY(16px);
       }
       to {
         opacity: 1;
@@ -140,44 +172,57 @@
 </head>
 <body>
 
-  <div class="container">
+  <div class="glow-bg"></div>
+  <div id="hearts-container"></div>
+
+  <div class="card">
     
-    <!-- PAGE 1: Proposal Letter -->
-    <div id="page-main" class="page active">
-      <span class="tag">A Personal Note</span>
-      <h1>A Moment Shared With You</h1>
-      <p>
-        In the quiet moments, I often find myself appreciating the rare warmth and joy you bring into my life. Every conversation with you feels effortless, genuine, and special.
-        <br><br>
-        I would love to make more memories together. Will you give us that chance?
-      </p>
+    <!-- PAGE 1: The Letter -->
+    <div id="page-letter" class="page active">
+      <div class="salutation">Dearest... ✨</div>
+      <div class="letter-text">
+        Every once in a while, someone truly special enters your life and changes everything for the better. Being with you feels natural, peaceful, and endlessly joyful. I treasure every single moment, smile, and word we share together.
+      </div>
       <div class="button-group">
-        <button class="btn btn-primary" onclick="goToPage('page-yes')">Yes, I'd Love To</button>
-        <button class="btn btn-secondary" onclick="goToPage('page-no')">Maybe Later</button>
+        <button class="btn btn-yes" onclick="goToPage('page-yes')">Yes, Always ❤️</button>
+        <button class="btn btn-no" onclick="goToPage('page-no')">Thank You ✨</button>
       </div>
     </div>
 
-    <!-- PAGE 2: Accepted Page -->
+    <!-- PAGE 2: When "Yes" is Clicked -->
     <div id="page-yes" class="page">
-      <span class="tag">Special Moment</span>
-      <h1>You Made My Day ✨</h1>
-      <p>
-        Thank you for opening your heart to this. I promise to make every moment worth your time and happiness.
-      </p>
+      <div class="salutation" style="font-size: 2.8rem;">You Made My Day! 💖</div>
+      <div class="letter-text" style="font-size: 1.15rem; margin-bottom: 0;">
+        Thank you for being such a beautiful part of my life. I promise to cherish you and always bring a smile to your face.
+      </div>
     </div>
 
-    <!-- PAGE 3: Declined/Polite Page -->
+    <!-- PAGE 3: When "Thank You" is Clicked -->
     <div id="page-no" class="page">
-      <span class="tag">Warm Regards</span>
-      <h1>Thank You</h1>
-      <p>
-        Thank you for taking the time to read this. Your presence in my life is something I appreciate immensely, always.
-      </p>
+      <div class="salutation" style="font-size: 2.5rem;">Thank You 🌸</div>
+      <div class="letter-text" style="font-size: 1.15rem; margin-bottom: 0;">
+        Thank you for taking the time to read this. Your presence alone means the world to me.
+      </div>
     </div>
 
   </div>
 
   <script>
+    // Create animated floating hearts in background
+    const heartsContainer = document.getElementById('hearts-container');
+    const heartSymbols = ['❤️', '💖', '💕', '✨'];
+
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 4 + 5) + 's';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      heartsContainer.appendChild(heart);
+    }
+
+    // Page switcher
     function goToPage(pageId) {
       document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
