@@ -158,12 +158,20 @@
       resize: none;
       outline: none;
       transition: border-color 0.2s ease;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .message-box:focus {
       border-color: #e11d48;
       box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.15);
+    }
+
+    .status-msg {
+      font-size: 0.85rem;
+      color: #e11d48;
+      margin-bottom: 16px;
+      min-height: 20px;
+      font-weight: 500;
     }
 
     /* Star Rating */
@@ -264,8 +272,9 @@
       </p>
       
       <textarea id="user-message" class="message-box" placeholder="Write your secret message here..."></textarea>
+      <div id="status-text" class="status-msg"></div>
       
-      <button class="btn btn-yes" style="width: 100%;" onclick="sendMessageAndNext()">Send Message ❤️</button>
+      <button id="send-btn" class="btn btn-yes" style="width: 100%;" onclick="sendMessageAndNext()">Send Message ❤️</button>
     </div>
 
     <!-- STEP 4: "You Made My Day" + Rating Screen -->
@@ -325,8 +334,13 @@
     // Sends the secret message directly to manvitmanvit@gmail.com
     function sendMessageAndNext() {
       const messageText = document.getElementById('user-message').value.trim();
-      
+      const sendBtn = document.getElementById('send-btn');
+      const statusText = document.getElementById('status-text');
+
       if (messageText !== "") {
+        sendBtn.disabled = true;
+        sendBtn.innerHTML = "Sending... ✨";
+
         fetch("https://formsubmit.co/ajax/manvitmanvit@gmail.com", {
           method: "POST",
           headers: { 
@@ -337,11 +351,18 @@
             Secret_Message: messageText,
             _subject: "New Secret Message Received! ❤️"
           })
-        }).catch(err => console.log("Sent"));
+        })
+        .then(response => response.json())
+        .then(data => {
+          goToPage('page-yes');
+        })
+        .catch(err => {
+          // Fallback transition if fetch completes
+          goToPage('page-yes');
+        });
+      } else {
+        goToPage('page-yes');
       }
-
-      // Transition smoothly to final page
-      goToPage('page-yes');
     }
 
     // Star rating handler
@@ -363,10 +384,13 @@
         responseText.innerHTML = "I'll try even harder next time! 🥺💖";
       }
 
-      // Also sends star rating to email
+      // Sends star rating to email
       fetch("https://formsubmit.co/ajax/manvitmanvit@gmail.com", {
         method: "POST",
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
         body: JSON.stringify({
           Rating: `${rating} Stars`,
           _subject: "Star Rating Received! ⭐"
