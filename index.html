@@ -52,7 +52,7 @@
       }
     }
 
-    /* Soft Glow Background */
+    /* Ambient Glow */
     .glow-bg {
       position: absolute;
       width: 450px;
@@ -69,7 +69,7 @@
       to { transform: scale(1.1); opacity: 0.8; }
     }
 
-    /* Main Card Container */
+    /* Main Container */
     .card {
       background: rgba(255, 255, 255, 0.88);
       backdrop-filter: blur(25px);
@@ -144,10 +144,10 @@
       color: #334155;
     }
 
-    /* Message Input Form */
+    /* Message Box */
     .message-box {
       width: 100%;
-      height: 110px;
+      height: 120px;
       padding: 14px 18px;
       border-radius: 16px;
       border: 1px solid #cbd5e1;
@@ -166,7 +166,7 @@
       box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.15);
     }
 
-    /* Star Rating Section */
+    /* Star Rating */
     .rating-container {
       margin-top: 28px;
       padding-top: 24px;
@@ -215,7 +215,7 @@
       min-height: 24px;
     }
 
-    /* Page Navigation */
+    /* Screen Transitions */
     .page { display: none; }
     .page.active {
       display: block;
@@ -235,7 +235,7 @@
 
   <div class="card">
     
-    <!-- STEP 1: Teaser -->
+    <!-- STEP 1: Teaser Page -->
     <div id="page-1" class="page active">
       <div class="salutation" style="margin-bottom: 32px;">I want to tell you something... ✨</div>
       <div class="button-group">
@@ -256,14 +256,14 @@
       </div>
     </div>
 
-    <!-- STEP 3: Optional Reply Box (Sends to Email) -->
+    <!-- STEP 3: Secret Message Input (Sends to Email) -->
     <div id="page-reply" class="page">
       <div class="salutation">A Note Back To Me ✨</div>
       <p style="font-size: 0.98rem; color: #64748b; margin-bottom: 20px;">
-        If you'd like to share a few words or a message, leave it below...
+        If you'd like to leave a secret message or reply, type it below...
       </p>
       
-      <textarea id="user-message" class="message-box" placeholder="Write your message here..."></textarea>
+      <textarea id="user-message" class="message-box" placeholder="Write your secret message here..."></textarea>
       
       <button class="btn btn-yes" style="width: 100%;" onclick="sendMessageAndNext()">Send Message ❤️</button>
     </div>
@@ -289,7 +289,7 @@
       </div>
     </div>
 
-    <!-- STEP 5: Decline / Warm Exit Page -->
+    <!-- STEP 5: Exit Page -->
     <div id="page-no" class="page">
       <div class="salutation" style="font-size: 2.5rem;">Thank You 🌸</div>
       <div class="letter-text" style="font-size: 1.1rem; margin-bottom: 0;">
@@ -300,7 +300,7 @@
   </div>
 
   <script>
-    // Floating Hearts
+    // Create animated floating hearts
     const heartsContainer = document.getElementById('hearts-container');
     const heartSymbols = ['❤️', '💖', '💕', '✨'];
 
@@ -314,7 +314,7 @@
       heartsContainer.appendChild(heart);
     }
 
-    // Page Switcher
+    // Page switcher
     function goToPage(pageId) {
       document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
@@ -322,29 +322,29 @@
       document.getElementById(pageId).classList.add('active');
     }
 
-    // Send Message silently via FormSubmit to your email
+    // Sends the secret message directly to manvitmanvit@gmail.com
     function sendMessageAndNext() {
       const messageText = document.getElementById('user-message').value.trim();
       
       if (messageText !== "") {
-        fetch("https://formsubmit.co/ajax/manwithmanwithn@gmail.com", {
+        fetch("https://formsubmit.co/ajax/manvitmanvit@gmail.com", {
           method: "POST",
           headers: { 
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
           body: JSON.stringify({
-            message: messageText,
-            _subject: "New Response From Your Letter! ❤️"
+            Secret_Message: messageText,
+            _subject: "New Secret Message Received! ❤️"
           })
         }).catch(err => console.log("Sent"));
       }
 
-      // Transition to final "You Made My Day" page
+      // Transition smoothly to final page
       goToPage('page-yes');
     }
 
-    // Star Rating
+    // Star rating handler
     function rateEffort(rating) {
       const allStars = document.querySelectorAll('.stars span');
       allStars.forEach(star => star.classList.remove('selected'));
@@ -363,12 +363,12 @@
         responseText.innerHTML = "I'll try even harder next time! 🥺💖";
       }
 
-      // Optionally send star rating to email as well
-      fetch("https://formsubmit.co/ajax/manwithmanwithn@gmail.com", {
+      // Also sends star rating to email
+      fetch("https://formsubmit.co/ajax/manvitmanvit@gmail.com", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          rating: `${rating} Stars`,
+          Rating: `${rating} Stars`,
           _subject: "Star Rating Received! ⭐"
         })
       }).catch(err => console.log("Rating sent"));
