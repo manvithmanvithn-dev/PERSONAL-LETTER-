@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Special Message For You ❤️</title>
+  <title>A Letter For You</title>
   <style>
     * {
       box-sizing: border-box;
@@ -16,170 +16,192 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #feada6 100%);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       overflow: hidden;
       position: relative;
     }
 
-    /* Floating Hearts Background */
-    .heart {
+    /* Soft floating ambient light */
+    .bg-circle {
       position: absolute;
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 20px;
-      animation: floatUp 6s linear infinite;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(80px);
       z-index: 1;
     }
 
-    @keyframes floatUp {
-      0% {
-        transform: translateY(100vh) scale(0.5);
-        opacity: 0;
-      }
-      50% {
-        opacity: 0.8;
-      }
-      100% {
-        transform: translateY(-10vh) scale(1.2);
-        opacity: 0;
-      }
+    .circle-1 {
+      width: 300px;
+      height: 300px;
+      top: -50px;
+      left: -50px;
     }
 
-    /* Card Container */
+    .circle-2 {
+      width: 400px;
+      height: 400px;
+      bottom: -100px;
+      right: -100px;
+    }
+
+    /* Clean, Professional Glass Card */
     .card {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 40px 30px;
-      border-radius: 20px;
-      box-shadow: 0 15px 35px rgba(219, 112, 147, 0.3);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      padding: 48px 36px;
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
       text-align: center;
-      max-width: 420px;
+      max-width: 460px;
       width: 90%;
       z-index: 10;
-      backdrop-filter: blur(5px);
-      border: 2px solid #ffb6c1;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(230, 57, 70, 0.1);
+      color: #e63946;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
     }
 
     .card h1 {
-      color: #d63384;
-      font-size: 2rem;
-      margin-bottom: 15px;
+      color: #2b2d42;
+      font-size: 2.1rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      line-height: 1.2;
     }
 
     .card p {
-      color: #6c757d;
-      font-size: 1.1rem;
-      line-height: 1.6;
-      margin-bottom: 25px;
+      color: #4a4e69;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    .highlight {
+      color: #e63946;
+      font-weight: 600;
     }
 
     .buttons {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      align-items: center;
+      gap: 16px;
       position: relative;
       min-height: 50px;
     }
 
     .btn {
-      padding: 12px 28px;
+      padding: 14px 32px;
       font-size: 1rem;
-      font-weight: bold;
+      font-weight: 600;
       border: none;
-      border-radius: 50px;
+      border-radius: 12px;
       cursor: pointer;
-      transition: transform 0.2s, background-color 0.2s;
+      transition: all 0.25s ease;
     }
 
     .btn-yes {
-      background-color: #ff4d6d;
-      color: white;
-      box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+      background-color: #e63946;
+      color: #ffffff;
+      box-shadow: 0 8px 20px rgba(236, 64, 122, 0.25);
     }
 
     .btn-yes:hover {
-      background-color: #ff2a54;
-      transform: scale(1.08);
+      background-color: #d62828;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(236, 64, 122, 0.35);
     }
 
     .btn-no {
-      background-color: #ffb3c1;
-      color: #590d22;
+      background-color: #f1f3f5;
+      color: #495057;
+      border: 1px solid #dee2e6;
       position: relative;
     }
 
-    /* Success Message styling */
+    /* Success Screen */
     .success-message {
       display: none;
-      animation: fadeIn 0.8s ease-in-out forwards;
+      animation: fadeIn 0.6s ease-in-out forwards;
     }
 
     .success-message h2 {
-      color: #ff4d6d;
-      font-size: 1.8rem;
-      margin-bottom: 10px;
+      color: #2b2d42;
+      font-size: 2rem;
+      margin-bottom: 12px;
     }
 
     .success-message p {
-      font-size: 1.2rem;
-      color: #800f2f;
+      font-size: 1.1rem;
+      color: #4a4e69;
+      margin-bottom: 0;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating background elements -->
-  <div id="hearts-container"></div>
+  <div class="bg-circle circle-1"></div>
+  <div class="bg-circle circle-2"></div>
 
-  <!-- Proposal Card -->
   <div class="card">
+    <!-- Main Proposal View -->
     <div id="proposal-content">
-      <h1>Hey You! 💖</h1>
+      <span class="badge">A Note For You</span>
+      <h1>I Have Something to Tell You...</h1>
       <p>
-        Every moment with you feels like magic. I was wondering... will you do me the honor of being mine?
+        In a world full of noise, being with you brings clarity and comfort. 
+        You inspire me in ways I can't easily put into words, and every moment shared with you feels truly special.
+        <br><br>
+        <span class="highlight">Will you take this next step with me?</span>
       </p>
       <div class="buttons">
-        <button class="btn btn-yes" onclick="acceptProposal()">Yes! 💕</button>
-        <button class="btn btn-no" id="no-btn" onmouseover="moveNoButton()">No 😜</button>
+        <button class="btn btn-yes" onclick="acceptProposal()">Yes, I will</button>
+        <button class="btn btn-no" id="no-btn" onmouseover="moveNoButton()">Not yet</button>
       </div>
     </div>
 
-    <!-- Message shown after clicking "Yes" -->
+    <!-- Confirmation View -->
     <div id="success-content" class="success-message">
-      <h2>Yay! 🎉❤️</h2>
-      <p>You just made me the happiest person ever! 🥰✨</p>
+      <h2>You Just Made My Day ✨</h2>
+      <p>Thank you for trusting me with your heart. I promise to cherish every step of this journey together.</p>
     </div>
   </div>
 
   <script>
-    // Generate floating hearts
-    const heartsContainer = document.getElementById('hearts-container');
-    for (let i = 0; i < 25; i++) {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.innerHTML = '❤️';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-      heart.style.animationDelay = Math.random() * 5 + 's';
-      heartsContainer.appendChild(heart);
-    }
-
-    // Make the "No" button dodge the mouse cursor
+    // Dodging "Not yet" button
     function moveNoButton() {
       const btn = document.getElementById('no-btn');
-      const x = Math.random() * (window.innerWidth - btn.offsetWidth - 100);
-      const y = Math.random() * (window.innerHeight - btn.offsetHeight - 100);
+      const card = document.querySelector('.card');
+      
+      // Keep movement within reasonable bounds on screen
+      const maxX = window.innerWidth - btn.offsetWidth - 40;
+      const maxY = window.innerHeight - btn.offsetHeight - 40;
+
+      const randomX = Math.max(20, Math.floor(Math.random() * maxX));
+      const randomY = Math.max(20, Math.floor(Math.random() * maxY));
       
       btn.style.position = 'fixed';
-      btn.style.left = `${x}px`;
-      btn.style.top = `${y}px`;
+      btn.style.left = `${randomX}px`;
+      btn.style.top = `${randomY}px`;
     }
 
-    // Handle "Yes" click event
+    // Success response handler
     function acceptProposal() {
       document.getElementById('proposal-content').style.display = 'none';
       document.getElementById('success-content').style.display = 'block';
